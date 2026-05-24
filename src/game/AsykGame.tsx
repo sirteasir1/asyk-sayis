@@ -160,6 +160,7 @@ export function AsykGame({ onExit }: { onExit: () => void }) {
     streak: 0,
     score: 0,
     hitsThisThrow: 0,
+    hitsThisRound: 0,
     hitCenterFirst: false,
     perfectThisThrow: false,
     missedAnyThisRound: false,
