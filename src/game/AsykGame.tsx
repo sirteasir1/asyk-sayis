@@ -582,11 +582,12 @@ export function AsykGame({ onExit }: { onExit: () => void }) {
         w.score += 500;
         setScore(w.score);
         float(W / 2, 200, `CLEAR! +500`, "#ffd870", 32);
+        setTimeout(() => startRound(w.round + 1), 1100);
       } else {
         const left = w.asyks.filter(a => a.alive).length;
-        float(W / 2, 200, `ROUND OVER • ${left} LEFT`, "#ffd870", 28);
+        float(W / 2, 200, `GAME OVER • ${left} LEFT`, "#ff6464", 28);
+        setTimeout(() => finishGame(), 1100);
       }
-      setTimeout(() => startRound(w.round + 1), 1100);
     };
 
     const finishGame = () => {
