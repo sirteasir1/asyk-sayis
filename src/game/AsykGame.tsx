@@ -192,6 +192,7 @@ export function AsykGame({ onExit }: { onExit: () => void }) {
     w.asyks = spawnPattern(r - 1, w.isBoss);
     w.shotsLeft = 3;
     w.hitsThisThrow = 0;
+    w.hitsThisRound = 0;
     w.hitCenterFirst = false;
     w.missedAnyThisRound = false;
     // mark center asyk (closest to center X)
