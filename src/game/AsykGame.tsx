@@ -586,10 +586,13 @@ export function AsykGame({ onExit }: { onExit: () => void }) {
         setScore(w.score);
         float(W / 2, 200, `CLEAR! +500`, "#ffd870", 32);
         setTimeout(() => startRound(w.round + 1), 1100);
+      } else if (w.hitsThisRound === 0) {
+        float(W / 2, 200, `GAME OVER`, "#ff6464", 32);
+        setTimeout(() => finishGame(), 1100);
       } else {
         const left = w.asyks.filter(a => a.alive).length;
-        float(W / 2, 200, `GAME OVER • ${left} LEFT`, "#ff6464", 28);
-        setTimeout(() => finishGame(), 1100);
+        float(W / 2, 200, `ROUND OVER • ${left} LEFT`, "#ffd870", 28);
+        setTimeout(() => startRound(w.round + 1), 1100);
       }
     };
 
