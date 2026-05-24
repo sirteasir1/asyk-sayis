@@ -337,6 +337,7 @@ export function AsykGame({ onExit }: { onExit: () => void }) {
     const w = world.current;
     const isCenter = a.id === w.centerAsykId;
     w.hitsThisThrow += 1;
+    w.hitsThisRound += 1;
     if (w.hitsThisThrow === 1 && isCenter) w.hitCenterFirst = true;
 
     // Check perfect: hit asyk near its own center
