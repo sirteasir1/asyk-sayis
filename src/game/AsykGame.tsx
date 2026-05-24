@@ -160,6 +160,7 @@ export function AsykGame({ onExit }: { onExit: () => void }) {
     streak: 0,
     score: 0,
     hitsThisThrow: 0,
+    hitsThisRound: 0,
     hitCenterFirst: false,
     perfectThisThrow: false,
     missedAnyThisRound: false,
@@ -191,6 +192,7 @@ export function AsykGame({ onExit }: { onExit: () => void }) {
     w.asyks = spawnPattern(r - 1, w.isBoss);
     w.shotsLeft = 3;
     w.hitsThisThrow = 0;
+    w.hitsThisRound = 0;
     w.hitCenterFirst = false;
     w.missedAnyThisRound = false;
     // mark center asyk (closest to center X)
@@ -335,6 +337,7 @@ export function AsykGame({ onExit }: { onExit: () => void }) {
     const w = world.current;
     const isCenter = a.id === w.centerAsykId;
     w.hitsThisThrow += 1;
+    w.hitsThisRound += 1;
     if (w.hitsThisThrow === 1 && isCenter) w.hitCenterFirst = true;
 
     // Check perfect: hit asyk near its own center
@@ -583,10 +586,13 @@ export function AsykGame({ onExit }: { onExit: () => void }) {
         setScore(w.score);
         float(W / 2, 200, `CLEAR! +500`, "#ffd870", 32);
         setTimeout(() => startRound(w.round + 1), 1100);
+      } else if (w.hitsThisRound === 0) {
+        float(W / 2, 200, `GAME OVER`, "#ff6464", 32);
+        setTimeout(() => finishGame(), 1100);
       } else {
         const left = w.asyks.filter(a => a.alive).length;
-        float(W / 2, 200, `GAME OVER • ${left} LEFT`, "#ff6464", 28);
-        setTimeout(() => finishGame(), 1100);
+        float(W / 2, 200, `ROUND OVER • ${left} LEFT`, "#ffd870", 28);
+        setTimeout(() => startRound(w.round + 1), 1100);
       }
     };
 
